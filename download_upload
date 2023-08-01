@@ -1,0 +1,35 @@
+#!/bin/bash
+
+export GITHUB_TOKEN=github_pat_CHANGEME
+
+#sudo apt-get install -y rename > /dev/null 2>&1
+#go install github.com/github-release/github-release@latest
+rm -f index.html*
+
+myArray=("crosshatch" "sargo" "bonito" "flame" "coral" "sunfish" "bramble" "redfin" "barbet" "marlin")
+myArray=("sailfish" "walleye" "taimen" "blueline" "crosshatch" "sargo" "bonito" "flame" "coral" "sunfish" "bramble" "redfin" "barbet" "oriole" "raven" "bluejay" "panther" "cheetah" "lynx" "marlin")
+RANDOM_DEVICE=${myArray[ $RANDOM % ${#myArray[@]} ]}
+echo $RANDOM_DEVICE
+
+github-release release \
+    --user gsihelp \
+    --repo backup_microglineageos \
+    --tag $RANDOM_DEVICE 
+
+wget --quiet --wait 2 --random-wait \
+      -r -l1 --no-parent --no-directories \
+      https://download.lineage.microg.org/$RANDOM_DEVICE/
+
+rm -f index.html*
+
+for i in `find . -type f \( -iname lineage\*m -o -iname lineage\*.zip -o -iname lineage\*img \) -printf '%f\n'`
+do
+echo $i
+github-release upload -R --user gsihelp \
+   --repo backup_microglineageos \
+   --tag $RANDOM_DEVICE \
+   --file $i --name $i
+rm -fr $i
+sleep 2
+done
+
