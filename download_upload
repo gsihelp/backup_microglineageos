@@ -2,9 +2,11 @@
 
 export GITHUB_TOKEN=github_pat_CHANGEME
 
+
 #sudo apt-get install -y rename > /dev/null 2>&1
 #go install github.com/github-release/github-release@latest
 rm -f index.html*
+
 
 myArray=("crosshatch" "sargo" "bonito" "flame" "coral" "sunfish" "bramble" "redfin" "barbet" "marlin")
 myArray=("sailfish" "walleye" "taimen" "blueline" "crosshatch" "sargo" "bonito" "flame" "coral" "sunfish" "bramble" "redfin" "barbet" "oriole" "raven" "bluejay" "panther" "cheetah" "lynx" "marlin")
